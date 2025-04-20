@@ -11,3 +11,4 @@ motor
 certifi
 python-jose
 pymongo
+python-multipart

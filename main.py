@@ -315,8 +315,10 @@ async def create_checkout_session(current_user: dict = Depends(get_current_user)
                 },
             ],
             mode="payment",
-            success_url="http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url="http://localhost:3000/cancel",
+            # success_url="http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+            # cancel_url="http://localhost:3000/cancel",
+            success_url="https://likemeornot.com/success?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url="https://likemeornot.com/cancel",
             metadata={"username": current_user["username"]}
         )
         print("Stripe Checkout Session created:", session)
@@ -339,8 +341,10 @@ async def create_subscription_session(current_user: dict = Depends(get_current_u
                 {"price": "price_1REDAYLIfxI8v49W6dzoFRZ0", "quantity": 1},
             ],
             mode="subscription",
-            success_url="http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url="http://localhost:3000/cancel",
+            # success_url="http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+            # cancel_url="http://localhost:3000/cancel",
+            success_url="https://likemeornot.com/success?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url="https://likemeornot.com/cancel",
             metadata={"username": current_user["username"]}
         )
         print("Stripe Subscription Session created:", session)

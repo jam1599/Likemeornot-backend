@@ -32,19 +32,14 @@ origins = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["https://likemeornot.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.middleware("http")
-async def log_request(request: Request, call_next):
 
-    print(f"DEBUG: Request to {request.url}, method: {request.method}")
-    response = await call_next(request)
-    print(f"Request to {request.url}, method: {request.method}")
-    return response
+
 
 # ---------------------------
 # MONGODB SETUP (using Motor)
@@ -74,6 +69,15 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     print("DEBUG: Created JWT with payload:", to_encode)  # Debug log
     return encoded_jwt
+
+@app.middleware("http")
+async def log_request(request: Request, call_next):
+    print(f"DEBUG: Request to {request.url}, method: {request.method}")
+    print(f"DEBUG: Request headers: {request.headers}")
+    response = await call_next(request)
+    print(f"DEBUG: Response status code: {response.status_code}")
+    print(f"DEBUG: Response headers: {response.headers}")
+    return response
 
 
 

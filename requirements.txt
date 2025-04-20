@@ -2,7 +2,7 @@ fastapi
 numpy
 uvicorn[standard]
 numpy
-openai
+openai==0.28
 python-dotenv
 easyocr
 Pillow

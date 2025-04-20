@@ -38,6 +38,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def log_request(request: Request, call_next):
+
+    print(f"DEBUG: Request to {request.url}, method: {request.method}")
+    response = await call_next(request)
+    print(f"Request to {request.url}, method: {request.method}")
+    return response
+
 # ---------------------------
 # MONGODB SETUP (using Motor)
 # ---------------------------
